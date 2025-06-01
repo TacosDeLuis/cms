@@ -1,0 +1,32 @@
+// .devcontainer/devcontainer.json
+{
+    "name": "Fresh PayloadCMS App (Node 20 + PostgreSQL)",
+    "image": "mcr.microsoft.com/devcontainers/javascript-node:1-20-bullseye", // Node.js 20.x LTS, includes npm & npx
+    "features": {
+        "ghcr.io/devcontainers/features/postgres:1": {
+            "version": "latest", // Installs the latest stable PostgreSQL
+            "user": "test", // Your desired PostgreSQL username
+            "password": "test", // Your desired PostgreSQL password (CHOOSE A STRONG ONE FOR REAL PROJECTS!)
+            "database": "payload-cms-app" // Your desired PostgreSQL database name
+        }
+    },
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.shell.linux": "/bin/bash"
+                // You can add other VS Code settings later if needed
+            },
+            "extensions": [ // Optional: Add any VS Code extensions you commonly use
+                "dbaeumer.vscode-eslint",
+                "esbenp.prettier-vscode"
+            ]
+        }
+    },
+    "forwardPorts": [
+        3000, // Default for Payload CMS
+        5432 // Default for PostgreSQL
+    ],
+    // We will not use a postCreateCommand or bootstrap.sh for this initial clean setup
+    // to ensure the base image and features are the only things setting up Node and PG.
+    "remoteUser": "vscode" // Common default user in Microsoft dev container images, has passwordless sudo
+}
